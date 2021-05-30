@@ -1,3 +1,4 @@
+{% extends "base.html" %}
 {% block content %}
 	{% for post in post_list %}
 		<a href="{% url "postDetail" post.id %}"> {{post}} </a> </p>

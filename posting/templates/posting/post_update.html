@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+	<h2> 포스트 수정하기 </h2>
+	<form method="POST" action="{% url "postUpdate" post.id %}" enctype="multipart/form-data">
+		{% csrf_token %}
+
+		<input type="text" value="{{ post.title }}" name="title">
+		<input type="text" value="{{ post.content }}" name="content">
+
+		<input type="file" name="imgs" multiple>
+		<input type="submit" value="작성">
+	</form>
+{% endblock %}
