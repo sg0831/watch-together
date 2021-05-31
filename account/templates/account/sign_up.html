@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+	{% if form.errors %}
+		<p> 옳바른 정보를 입력해주세요. </p>
+	{% endif %}
+
+	<form method="POST">
+	{% csrf_token %}
+
+	{{ form.as_p }}
+		<input type="submit" value="가입하기">
+	</form>
+
+{% endblock %}

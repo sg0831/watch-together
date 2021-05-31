@@ -2,12 +2,33 @@
 {% block content %}
 	<a href="{% url "postUpdate" post.id%}"> 수정 </a>
 	<a href="{% url "postDelete" post.id%}"> 삭제 </a>
+	{% if user in post.like.all %}
+		<a href="{% url "postLike" post.id %}"> 좋아요 취소 </a>
+	{% else %}
+		<a href="{% url "postLike" post.id %}"> 좋아요 </a>
+	{% endif %}
 
 	<h2> {{ post.title }} </h2>
-		{{ post.created }}
+	작성일 : {{ post.created }}
+	좋아요 : {{ post.like_count }}
 
 		<p> {{ post.content }} </p>
 		{% for photo in post.photo_set.all %}
 			<img src="{{ photo.image.url }}" width="50"> <br>
 		{% endfor %}
+
+	<h2> 댓글 </h2>
+		{% for comment in post.comment_set.all %}
+		<p>
+			작성자: {{ comment.user }} <br>
+			내용: {{ comment.content }} <br>
+		</p>
+		{% endfor %}
+
+		<form method="POST" action="{% url "commentCreate" post.id %}">
+		{% csrf_token %}
+			<input type="text" name="content">
+			<input type="submit" value="작성">
+		</form>
+
 {% endblock %}
