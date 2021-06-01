@@ -1,4 +1,5 @@
 import os
+import django_heroku
 
 """
 Django settings for watch_together project.
@@ -25,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o@%sfs15iy9t4*u00-q)lbxr@jgi6i3yg+)1ws5g8=#=e*)+ug'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 
 # Application definition
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'watch_together.urls'
@@ -134,3 +136,6 @@ MEDIA_URL = "/media/"
 STATICFILES_DIRS = [
 os.path.join(BASE_DIR, 'static')
 ]
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
