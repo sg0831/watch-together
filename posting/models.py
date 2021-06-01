@@ -25,3 +25,7 @@ class Comment(models.Model):
 	updated = models.DateTimeField( auto_now_add=True )
 	like_count = models.PositiveIntegerField( default=0 )
 	like = models.ManyToManyField( User, related_name='like_comments', blank=True )
+
+class Friend(models.Model):
+	user = models.ForeignKey( User, on_delete=models.CASCADE )
+	friend = models.ManyToManyField( User, related_name='friend_users', blank=True )

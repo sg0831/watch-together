@@ -58,7 +58,7 @@ ROOT_URLCONF = 'watch_together.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates') ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,7 +130,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # 미디어 파일을 관리할 media 디렉터리
 MEDIA_ROOT = os.path.join( BASE_DIR, 'media' )
 MEDIA_URL = "/media/"
-# 웹페이지에 사용할 정적파일의 최상위 URL경로
-STATIC_URL = '/static/'
-#정적파일이 위치한 경로들을 지정하는 설정 항목
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+STATICFILES_DIRS = [
+os.path.join(BASE_DIR, 'static')
+]

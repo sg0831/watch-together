@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.views.generic import ListView, CreateView, DetailView
-from .models import Post, Photo, Comment
+from .models import Post, Photo, Comment, Friend
 
 def myTest( request, pk ):
 	post = Post( id=pk )
@@ -12,7 +12,7 @@ def myTest( request, pk ):
 
 class PostList( ListView ):
 	def get_queryset(self):
-		return Post.objects.order_by("-created")[:5]
+		return Post.objects.order_by("-created")
 
 class PostDetail( DetailView ):
 	model = Post
@@ -92,3 +92,14 @@ def commentCreate( request, post_id ):
 
 		comment.save()
 		return redirect( reverse( "postDetail", args=[comment.post.id] ) )
+
+
+# 인기글
+class PopularPost( ListView ):
+	def get_queryset(self):
+		return Post.objects.order_by("-like_count")
+
+# 친구 리스트
+class FriendList( ListView ):
+	def get_queryset(self):
+		return Friend.objects.all()

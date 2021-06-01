@@ -1,8 +1,28 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block content %}
-	<a href="{% url "postCreate" %}"> 작성 </a>
+{% load static %}
 
-	{% for post in post_list %}
-		<a href="{% url "postDetail" post.id %}"> {{post}} </a> </p>
-	{% endfor %}
+            <article class="entry">
+
+              <a href="{% url "postCreate" %}"> 작성 </a>
+
+              {% for post in post_list %}
+
+              <div class="entry-img">
+                <img src="{% static "img/blog/blog-1.jpg" %}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="{% url "postDetail" post.id %}">{{ post.title }}</a>
+              </h2>
+
+              <div class="entry-content">
+                <p>
+                  {{ post.content }}
+                </p>
+
+              {% endfor %}
+
+            </article><!-- End blog entry -->
+
 {% endblock %}
